@@ -29,8 +29,15 @@ def home(request, *args, **kwargs):
     return render(request, html_template, my_content)
 
 def login_user(request):
-    username = request.POST["username"]
-    password = request.POST["password"]
+    if request.method != "POST":
+        return render(request, 'login.html')
+
+    username = request.POST.get("username")
+    password = request.POST.get("password")
+
+    if not username or not password:
+        return render(request, 'login.html', {"message": "Username and password are required."})
+
     user = authenticate(request, username=username, password=password)
     if user is not None:
         login(request, user)
