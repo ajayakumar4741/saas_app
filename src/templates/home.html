@@ -1,11 +1,17 @@
-{% extends 'base.html' %}
-{% block title %}homepage - {{block.super}}{% endblock %}
+{% extends "base.html" %}
+
+{% block head_title %}{{ title|default:"Home" }} - SaaS{% endblock head_title %}
+
 {% block content %}
-<p>hello everyone</p>
-{% include 'snippets/welcome.html' %}
-<br>
-<br>
-visit count: {{page_visits}}
-total visits: {{total_visits}}
-percent: {{percentage}}
-{% endblock %}
+<main class="max-w-screen-xl mx-auto px-4 py-10">
+    <section class="space-y-4">
+        <h1 class="text-3xl font-bold text-gray-900">My Home Page</h1>
+        {% include "snippets/welcome-user-msg.html" %}
+        <div class="text-gray-700">
+            <p>Visit count: {{ page_visits }}</p>
+            <p>Total visits: {{ total_visits }}</p>
+            <p>Percent: {{ percentage|floatformat:2 }}%</p>
+        </div>
+    </section>
+</main>
+{% endblock content %}

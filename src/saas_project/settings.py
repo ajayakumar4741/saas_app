@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost','railway.app']
 # Application definition
 
 INSTALLED_APPS = [
+    "allauth_ui",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,12 +40,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'visits',
     'commando',
+    
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.github',
     "widget_tweaks",
     "slippers",
-    "allauth_ui",
+    
 ]
 
 # settings.py
@@ -70,6 +73,12 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
     
 ]
+
+SOCIALACCOUNT_PROVIDERS = {
+  'google': {
+      'EMAIL_AUTHENTICATION': True
+  }
+}
 
 ROOT_URLCONF = 'saas_project.urls'
 
@@ -177,7 +186,6 @@ STATICFILES_VENDOR_DIR.mkdir(parents=True, exist_ok=True)
 STATICFILES_DIRS = [
     STATICFILES_BASE_DIR,
     STATICFILES_VENDOR_DIR,
-
 ]
 
 STATIC_ROOT = BASE_DIR / 'local-cdn'
